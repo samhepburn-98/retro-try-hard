@@ -1,0 +1,34 @@
+{
+  "name": "retro-try-hard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "retro-try-hard",
+  "author": "samhepburn-98",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@studio-freight/react-lenis": "^0.0.19",
+    "gatsby": "^5.9.1",
+    "gsap": "^3.11.5",
+    "imagesloaded": "^5.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/imagesloaded": "^4.1.2",
+    "@types/locomotive-scroll": "^4.1.0",
+    "@types/node": "^18.16.5",
+    "@types/react": "^18.2.5",
+    "@types/react-dom": "^18.2.4",
+    "typescript": "^5.0.4"
+  }
+}
