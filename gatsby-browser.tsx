@@ -1,21 +1,24 @@
 import * as React from "react";
+import { useRef } from "react";
 import { GatsbyBrowser } from "gatsby";
-import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
+import { LocomotiveScrollProvider } from "./src/hooks/LocomotiveScrollContext";
+import "./src/components/scroll.css";
 
 const App = ({ children }: { children: React.ReactNode }) => {
+    const componentRef = useRef(null); // create a ref for the root level element (for scoping)
+
     return (
-        <ReactLenis root options={{
-            ...{
-                lerp: 0.2,
-                smoothWheel: true,
-                normalizeWheel: true
-            }
-        }}>
-            <body>
+        <LocomotiveScrollProvider
+            containerRef={componentRef}
+            options={{
+                smooth: true
+            }}
+            watch={[]}
+        >
+            <body data-scroll-container="true">
             {children}
             </body>
-        </ReactLenis>
-
+        </LocomotiveScrollProvider>
     );
 };
 

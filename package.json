@@ -16,12 +16,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@studio-freight/react-lenis": "^0.0.19",
     "gatsby": "^5.9.1",
     "gsap": "^3.11.5",
     "imagesloaded": "^5.0.0",
+    "locomotive-scroll": "^4.1.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "use-debounce": "^9.0.4",
+    "use-resize-observer": "^9.1.0"
   },
   "devDependencies": {
     "@types/imagesloaded": "^4.1.2",

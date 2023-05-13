@@ -24,9 +24,9 @@ body {
     font-family: halyard-display, sans-serif;
 }
 
-.noscroll .main {
-    overflow: hidden;
-    height: 100vh;
+.noscroll {
+    /*overflow: hidden;*/
+    /*height: 100vh;*/
 }
 
 /* Page Loader */
@@ -421,26 +421,4 @@ html.has-scroll-dragging {
     .gallery__item-caption {
         padding: 0 0 0 1rem;
     }
-}
-
-
-/*LENIS*/
-html.lenis {
-    height: auto;
-}
-
-.lenis.lenis-smooth {
-    scroll-behavior: auto;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-    overflow: hidden;
-}
-
-.lenis.lenis-scrolling iframe {
-    pointer-events: none;
 }

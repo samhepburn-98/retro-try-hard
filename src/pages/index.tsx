@@ -10,7 +10,7 @@ import img5 from "../images/5.01.jpg";
 import gsap from "gsap";
 
 import "../components/demo1.css";
-import { ReactLenis } from "@studio-freight/react-lenis";
+import { useLocomotiveScroll } from "../hooks/useLocomotiveScroll";
 
 const getRandomInteger = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
 
@@ -41,10 +41,15 @@ const IndexPage: React.FC<PageProps> = () => {
         entriesRef.current = entriesRef.current.slice(0, entries.length);
     }, [entries]);
 
-    const componentRef = useRef<HTMLDivElement>(null); // create a ref for the root level element (for scoping)
     const titleRef = useRef<HTMLDivElement>(document.createElement("div"));
 
     const [isAnimating, setIsAnimating] = useState(true);
+
+    const { scroll } = useLocomotiveScroll();
+    useEffect(() => {
+        scroll?.update()
+    }, [scroll]);
+
 
     useLayoutEffect(() => {
             Promise.all([preloadImages(".gallery__item-imginner")]).then(() => {
@@ -91,14 +96,17 @@ const IndexPage: React.FC<PageProps> = () => {
                             .addLabel("startAnimation", "+=0")
                             // allow scroll and update the locomotive scroll
                             .add(() => {
+                                console.log(document.querySelector(".body")?.classList.toString());
                                 document.querySelector(".body")?.classList.remove("noscroll");
-                                // scroll.update();
+                                console.log(document.querySelector(".body")?.classList.toString());
+                                console.log(scroll);
+                                scroll?.update();
                             }, "startAnimation")
                             // animate the main title characters out and fade them out too
                             .to(titleRef.current.children, {
                                 duration: 1,
                                 ease: "expo",
-                                x: (pos, target) => {
+                                x: (pos) => {
                                     return -40 * (Math.floor(titleRef.current.children.length / 2) - pos);
                                 },
                                 opacity: 0,
@@ -157,7 +165,7 @@ const IndexPage: React.FC<PageProps> = () => {
                         timeline
                             .add(() => {
                                 if (pos === entriesRef.current.length - 1) setIsAnimating(false);
-                            }, "startAnimation+=1")
+                            }, "startAnimation+=0.5")
                             .to(chars, {
                                 duration: 2,
                                 ease: "expo",
@@ -187,7 +195,7 @@ const IndexPage: React.FC<PageProps> = () => {
     );
 
     return (
-        <div ref={componentRef} className="body loading noscroll">
+        <div className="body loading" data-scroll-section="true">
             <div className="main">
                 <h2 className="title" ref={titleRef} style={{ opacity: 0 }}>
                     {split("R T H")}
@@ -247,13 +255,9 @@ const IndexPage: React.FC<PageProps> = () => {
                                          style={{ backgroundImage: `url(${entries[i]})` }}></div>
                                 </div>
                                 <figcaption className="gallery__item-caption">
-                                    <ReactLenis options={{ lerp: 0.01 }}>
-                                        <h2
-                                            className="gallery__item-title"
-                                        >
-                                            {split(i === 0 ? "Chesterfield" : "Sommerset")}
-                                        </h2>
-                                    </ReactLenis>
+                                    <h2 className="gallery__item-title" data-scroll="true" data-scroll-speed="2">
+                                        {split(i === 0 ? "Chesterfield" : "Sommerset")}
+                                    </h2>
                                     <span className="gallery__item-number">01</span>
                                     <p className="gallery__item-text">Amalia Lynn</p>
                                     <p className="gallery__item-text">1988</p>
